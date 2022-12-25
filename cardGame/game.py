@@ -1,29 +1,26 @@
-from deck import deck
-from player import player
+from Deck import Deck
+from Player import Player
 
 
-class game :
+class Game :
 
-    def __init__(self):
+    def __init__(self,player1name,player2name):
 
-        player1name = input("enter player 1's username:")
-        player2name = input("enter player 2's username:")
+        self.player1= Player(player1name)
+        self.player2= Player(player2name)
 
-        self.player1= player(player1name)
-        self.player2= player(player2name)
+        self.Deck = Deck()
 
-        self.Deck = deck()
-
-    def wining(self,p1,p2):
-        if(p1.wins > p2.wins):
-            print(p1.username + " won the game with the score of "+ str(p1.wins))
+    def wining(self,player1name,player2name):
+        if(player1name.wins > player2name.wins):
+            print(player1name.username + " won the game with the score of "+ str(player1name.wins))
         else:
-            print(p2.username + " won the game with the score of "+ str(p2.wins))
+            print(player2name.username + " won the game with the score of "+ str(player2name.wins))
 
 
     def play_game(self):
         response = 'c'
-        while(len(self.Deck.cards)>1 and response != 'q'):
+        while(len(self.Deck.cards)>1 and response != 'q' and response != 'Q'):
 
            self.player1.card = self.Deck.rm_card()
            self.player2.card = self.Deck.rm_card()
@@ -38,12 +35,16 @@ class game :
                 self.player2.wins += 1
                 print(self.player2.username + " won")
 
-           response = input("enter q if you want to quit and :")
+           response = input("enter q if you want to quit and any other letter if you want to continue:")
 
         print("game is over")
         self.wining(self.player1,self.player2)
 
 
-game = game()
+# START THE GAME
+player1name = input("enter player 1's username:")
+player2name = input("enter player 2's username:")
 
-game.play_game()
+Game = Game(player1name,player2name)
+
+Game.play_game()
